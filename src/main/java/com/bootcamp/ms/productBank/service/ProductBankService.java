@@ -6,8 +6,8 @@ import reactor.core.publisher.Mono;
 
 public interface ProductBankService {
 
-    public Flux<ProductBank> findAll();
-    public Mono<ProductBank> findById(String id);
-    public Mono<ProductBank> save(ProductBank productBank);
-    public Mono<Void> delete(ProductBank productBank);
+    Flux<ProductBank> findAll();
+    Mono<ProductBank> findById(String id);
+    Mono<ProductBank> save(ProductBank productBank);
+    Mono<Void> delete(ProductBank productBank);
 }

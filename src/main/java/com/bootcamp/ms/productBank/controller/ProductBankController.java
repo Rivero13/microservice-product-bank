@@ -40,8 +40,6 @@ public class ProductBankController {
 
     @DeleteMapping(value = "/{id}")
     public Mono<Void> delete(@PathVariable String id) {
-        return productBankService.findById(id).flatMap(p -> {
-            return productBankService.delete(p);
-        });
+        return productBankService.findById(id).flatMap(p -> productBankService.delete(p));
     }
 }
