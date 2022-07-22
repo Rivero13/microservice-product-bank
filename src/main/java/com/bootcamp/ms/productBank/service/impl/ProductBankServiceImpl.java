@@ -8,11 +8,18 @@ import org.springframework.stereotype.Service;
 import reactor.core.publisher.Flux;
 import reactor.core.publisher.Mono;
 
+import java.util.Optional;
+import java.util.stream.Stream;
+
 @Service
 public class ProductBankServiceImpl implements ProductBankService {
 
     @Autowired
     private ProductBankRepository productBankRepository;
+
+    public ProductBankServiceImpl(ProductBankRepository productBankRepository) {
+        this.productBankRepository = productBankRepository;
+    }
 
     @Override
     public Flux<ProductBank> findAll() {
@@ -32,5 +39,13 @@ public class ProductBankServiceImpl implements ProductBankService {
     @Override
     public Mono<Void> delete(ProductBank productBank) {
         return productBankRepository.delete(productBank);
+    }
+
+    @Override
+    public Optional<ProductBank> findByDescription(String description) {
+        return productBankRepository.findAll()
+                .toStream()
+                .filter(p -> p.getDescription().contains(description))
+                .findFirst();
     }
 }
